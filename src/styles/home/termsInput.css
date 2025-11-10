@@ -1,0 +1,130 @@
+.terms-input-container {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.terms-input-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.terms-input-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.terms-input-tab {
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #6b7280;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.terms-input-tab.active {
+  color: #1f2937;
+  border-bottom-color: #1f2937;
+  font-weight: 500;
+}
+
+.terms-input-textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.terms-input-textarea:focus {
+  outline: none;
+  border-color: #6b7280;
+}
+
+.terms-input-file-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #f9fafb;
+}
+
+.terms-input-file-input {
+  display: none;
+}
+
+.terms-input-file-label {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.terms-input-file-label:hover {
+  background-color: #f9fafb;
+}
+
+.terms-input-file-info {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.terms-input-file-name {
+  margin-top: 0.5rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.terms-input-button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background-color: #1f2937;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.terms-input-button:hover {
+  background-color: #374151;
+}
+
+.terms-input-button:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .terms-input-container {
+    padding: 1rem;
+  }
+
+  .terms-input-textarea {
+    min-height: 200px;
+    font-size: 0.8125rem;
+  }
+
+  .terms-input-file-area {
+    padding: 2rem 1rem;
+  }
+}

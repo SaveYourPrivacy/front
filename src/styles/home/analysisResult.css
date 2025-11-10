@@ -1,0 +1,49 @@
+.analysis-result-container {
+  margin-top: 2rem;
+}
+
+.analysis-result-loading {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6b7280;
+}
+
+.analysis-result-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #1f2937;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.analysis-result-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: #991b1b;
+}
+
+.analysis-result-error-title {
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.analysis-result-error-message {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .analysis-result-loading {
+    padding: 2rem 1rem;
+  }
+}

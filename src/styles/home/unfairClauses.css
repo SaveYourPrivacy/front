@@ -1,0 +1,148 @@
+.unfair-clauses {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.unfair-clauses-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+}
+
+.unfair-clause-item {
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.unfair-clause-item:last-child {
+  margin-bottom: 0;
+}
+
+.unfair-clause-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.unfair-clause-number {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin: 0;
+}
+
+.unfair-clause-text {
+  color: #1f2937;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.unfair-clause-issues {
+  border-top: 1px solid #fecaca;
+  padding-top: 1rem;
+}
+
+.unfair-clause-issue {
+  margin-bottom: 1rem;
+}
+
+.unfair-clause-issue:last-child {
+  margin-bottom: 0;
+}
+
+.unfair-clause-issue-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.unfair-clause-issue-type {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #991b1b;
+  margin: 0;
+}
+
+.unfair-clause-issue-severity {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #dc2626;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+.unfair-clause-issue-description {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0 0 0.5rem 0;
+}
+
+.unfair-clause-issue-law {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.unfair-clauses-recommendations {
+  background-color: #f0f9ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 2rem;
+}
+
+.unfair-clauses-recommendations-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin: 0 0 1rem 0;
+}
+
+.unfair-clauses-recommendations-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.unfair-clauses-recommendations-item {
+  color: #1e3a8a;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.unfair-clauses-recommendations-item:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .unfair-clauses {
+    padding: 1rem;
+  }
+
+  .unfair-clause-item {
+    padding: 1rem;
+  }
+
+  .unfair-clause-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .unfair-clauses-recommendations {
+    padding: 1rem;
+  }
+}
