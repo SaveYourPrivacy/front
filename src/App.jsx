@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/common/Header';
+import ScrollToTop from './components/common/ScrollToTop';
 import Home from './pages/Home';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <main className="main-content">
         <Home />
       </main>
+      <ScrollToTop />
     </div>
   );
 }
