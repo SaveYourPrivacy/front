@@ -3,7 +3,11 @@ import { sampleAnalysisResult } from '../mock/dummyData';
 /**
  * Analyzes terms text for unfair clauses
  * @param {string} termsText - The terms text to analyze
- * @returns {Promise} Analysis result
+ * @returns {Promise} Analysis result containing:
+ *   - summary: {title, overview, totalClauses, unfairCount, riskLevel}
+ *   - termsSummary: {mainPoints, keyRights, keyObligations}
+ *   - unfairClauses: array of unfair clause objects
+ *   - recommendations: array of recommendation strings
  */
 export const analyzeTerms = async (termsText) => {
   // For development: using dummy data

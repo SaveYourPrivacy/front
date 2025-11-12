@@ -40,7 +40,7 @@ function AnalysisResult({ result, isLoading, error }) {
 
   return (
     <div className="analysis-result-container">
-      <ResultSummary summary={result.summary} />
+      <ResultSummary summary={result.summary} termsSummary={result.termsSummary} />
       <UnfairClauses
         unfairClauses={result.unfairClauses}
         recommendations={result.recommendations}
