@@ -91,3 +91,20 @@ const readFileAsText = (file) => {
     reader.readAsText(file);
   });
 };
+
+/**
+ * Asks a question about the analyzed terms
+ * @param {string} question - The user's question
+ * @param {object} context - The analysis result context
+ * @returns {Promise<string>} The answer
+ */
+export const askQuestion = async (question, context) => {
+  // For development: using dummy response
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        `"${question}"에 대한 답변입니다.\n\n약관에 따르면 해당 내용은 이용자에게 불리할 수 있는 조항으로 해석될 여지가 있습니다. 특히 제 3조 2항을 참고하시면 구체적인 내용을 확인하실 수 있습니다. 추가적인 법률 자문이 필요할 수 있습니다.`
+      );
+    }, 1000);
+  });
+};

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TermsInput from '../components/home/TermsInput';
 import AnalysisResult from '../components/home/AnalysisResult';
+import QnASection from '../components/home/QnASection';
 import { analyzeTerms, analyzeTermsFromFile } from '../api/termsAnalysis';
 
 /**
@@ -41,6 +42,7 @@ function Home() {
         isLoading={isLoading}
         error={error}
       />
+      {analysisResult && <QnASection analysisResult={analysisResult} />}
     </div>
   );
 }
