@@ -107,4 +107,30 @@ export const askQuestion = async (question, context) => {
       );
     }, 1000);
   });
+
+  // Uncomment this block when backend API is ready
+  /*
+  try {
+    const response = await fetch('YOUR_API_ENDPOINT/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        question,
+        context // Pass analysis result or context ID
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to get answer');
+    }
+
+    const data = await response.json();
+    return data.answer;
+  } catch (error) {
+    console.error('Error asking question:', error);
+    throw error;
+  }
+  */
 };
