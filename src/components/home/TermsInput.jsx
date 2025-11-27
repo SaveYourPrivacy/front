@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../../styles/home/termsInput.css';
 import { sampleTermsText } from '../../mock/dummyData';
+import TermsCategorySelect from './TermsCategorySelect'; 
 
 /**
  * TermsInput Component
@@ -47,6 +48,9 @@ function TermsInput({ onAnalyze, isLoading }) {
 
   return (
     <div className="terms-input-container">
+
+      {/*약관 종류 선택 추가 */}
+      <TermsCategorySelect onSelect={(value) => console.log('선택된 약관 종류:', value)} />
       <h2 className="terms-input-title">약관 입력</h2>
 
       <div className="terms-input-tabs">

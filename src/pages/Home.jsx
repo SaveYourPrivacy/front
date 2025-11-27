@@ -3,11 +3,6 @@ import TermsInput from '../components/home/TermsInput';
 import AnalysisResult from '../components/home/AnalysisResult';
 import { analyzeTerms, analyzeTermsFromFile } from '../api/termsAnalysis';
 
-/**
- * Home Page Component
- * Main page for the terms analyzer application
- * Handles the flow: input terms -> analyze -> display results
- */
 function Home() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,16 +28,12 @@ function Home() {
     }
   };
 
-  return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-      <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} />
-      <AnalysisResult
-        result={analysisResult}
-        isLoading={isLoading}
-        error={error}
-      />
-    </div>
-  );
+ return ( 
+ <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}> 
+ <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} /> 
+ <AnalysisResult result={analysisResult} isLoading={isLoading} error={error} /> 
+ </div> 
+ ); 
 }
 
 export default Home;
