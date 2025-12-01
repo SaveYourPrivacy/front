@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TermsInput from '../components/home/TermsInput';
 import AnalysisResult from '../components/home/AnalysisResult';
+import ComplaintEmailTemplate from '../components/home/ComplaintEmailTemplate';
 import QuestionBoard from '../components/home/QuestionBoard';
 import { analyzeTerms, analyzeTermsFromFile } from '../api/termsAnalysis';
 import { askQuestion } from '../api/questionAnswer';
@@ -70,11 +71,14 @@ function Home() {
  <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} />
  <AnalysisResult result={analysisResult} isLoading={isLoading} error={error} />
  {analysisResult && (
-   <QuestionBoard
-     onAskQuestion={handleAskQuestion}
-     questions={questions}
-     isLoading={isLoadingQuestion}
-   />
+   <>
+     <ComplaintEmailTemplate analysisResult={analysisResult} />
+     <QuestionBoard
+       onAskQuestion={handleAskQuestion}
+       questions={questions}
+       isLoading={isLoadingQuestion}
+     />
+   </>
  )}
  </div>
  );

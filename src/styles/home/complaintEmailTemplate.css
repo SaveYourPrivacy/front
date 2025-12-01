@@ -1,0 +1,227 @@
+.complaint-email-template {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Loading state */
+.complaint-email-template-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+.complaint-email-template-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: complaint-email-spin 0.8s linear infinite;
+}
+
+@keyframes complaint-email-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.complaint-email-template-loading p {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-size: 0.9375rem;
+}
+
+/* Error state */
+.complaint-email-template-error {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.complaint-email-template-error-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin: 0 0 0.75rem 0;
+}
+
+.complaint-email-template-error-message {
+  color: #6b7280;
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+.complaint-email-template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.complaint-email-template-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.complaint-email-template-copy-button {
+  padding: 0.625rem 1.25rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.complaint-email-template-copy-button:hover {
+  background-color: #1d4ed8;
+}
+
+.complaint-email-template-copy-button:active {
+  background-color: #1e40af;
+}
+
+.complaint-email-template-success {
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.complaint-email-template-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.complaint-email-template-subject,
+.complaint-email-template-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.complaint-email-template-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.complaint-email-template-subject-text {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  color: #1f2937;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.complaint-email-template-body-text {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 1rem;
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  margin: 0;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.complaint-email-template-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.complaint-email-template-footer-note {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+/* Scrollbar styling for body text */
+.complaint-email-template-body-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.complaint-email-template-body-text::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.complaint-email-template-body-text::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.complaint-email-template-body-text::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .complaint-email-template {
+    padding: 1rem;
+  }
+
+  .complaint-email-template-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .complaint-email-template-copy-button {
+    width: 100%;
+  }
+
+  .complaint-email-template-title {
+    font-size: 1.125rem;
+  }
+
+  .complaint-email-template-body-text {
+    font-size: 0.8125rem;
+    max-height: 400px;
+  }
+
+  .complaint-email-template-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .complaint-email-template-copy-button {
+    display: none;
+  }
+
+  .complaint-email-template-success {
+    display: none;
+  }
+
+  .complaint-email-template-body-text {
+    max-height: none;
+    overflow: visible;
+  }
+}
