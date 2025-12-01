@@ -14,6 +14,7 @@ export const analyzeTerms = async (termsText) => {
   // Remove this block and uncomment the API call when backend is ready
   return new Promise((resolve) => {
     setTimeout(() => {
+      console.log(termsText);
       resolve(sampleAnalysisResult);
     }, 1500); // Simulate network delay
   });

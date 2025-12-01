@@ -7,6 +7,7 @@ function TermsCategorySelect({ onSelect }) {
     const handleSelect = (e) => {
         const value = e.target.value;
         setCategory(value);
+        console.log(category);
         onSelect(value);
     };
 
