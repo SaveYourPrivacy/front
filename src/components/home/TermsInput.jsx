@@ -15,6 +15,7 @@ function TermsInput({ onAnalyze, isLoading }) {
   const [activeTab, setActiveTab] = useState('text'); // 'text' or 'file'
   const [termsText, setTermsText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -26,11 +27,11 @@ function TermsInput({ onAnalyze, isLoading }) {
   const handleAnalyze = () => {
     if (activeTab === 'text') {
       if (termsText.trim()) {
-        onAnalyze(termsText, 'text');
+        onAnalyze(termsText, 'text', selectedCategory);
       }
     } else {
       if (selectedFile) {
-        onAnalyze(selectedFile, 'file');
+        onAnalyze(selectedFile, 'file', selectedCategory);
       }
     }
   };
@@ -50,7 +51,7 @@ function TermsInput({ onAnalyze, isLoading }) {
     <div className="terms-input-container">
 
       {/*약관 종류 선택 추가 */}
-      <TermsCategorySelect onSelect={(value) => console.log('선택된 약관 종류:', value)} />
+      <TermsCategorySelect onSelect={setSelectedCategory} />
       <h2 className="terms-input-title">약관 입력</h2>
 
       <div className="terms-input-tabs">

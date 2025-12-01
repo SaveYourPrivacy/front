@@ -35,6 +35,10 @@ function TermsCategorySelect({ onSelect }) {
                     <input type="radio" name="category" value="광고, 제3자 제공, 데이터 활용" onChange={handleSelect} />
                     <span>광고, 제3자 제공, 데이터 활용</span>
                 </div>
+                <div className="radio-item">
+                    <input type="radio" name="category" value="기타" onChange={handleSelect} defaultChecked/>
+                    <span>기타</span>
+                </div>
             </div>
         </div>
 

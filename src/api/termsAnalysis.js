@@ -3,18 +3,20 @@ import { sampleAnalysisResult } from '../mock/dummyData';
 /**
  * Analyzes terms text for unfair clauses
  * @param {string} termsText - The terms text to analyze
+ * @param {string} category - The category of terms (optional)
  * @returns {Promise} Analysis result containing:
  *   - summary: {title, overview, totalClauses, unfairCount, riskLevel}
  *   - termsSummary: {mainPoints, keyRights, keyObligations}
  *   - unfairClauses: array of unfair clause objects
  *   - recommendations: array of recommendation strings
  */
-export const analyzeTerms = async (termsText) => {
+export const analyzeTerms = async (termsText, category) => {
   // For development: using dummy data
   // Remove this block and uncomment the API call when backend is ready
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log(termsText);
+      console.log('Terms Text:', termsText);
+      console.log('Category:', category);
       resolve(sampleAnalysisResult);
     }, 1500); // Simulate network delay
   });
@@ -27,7 +29,10 @@ export const analyzeTerms = async (termsText) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ terms: termsText }),
+      body: JSON.stringify({
+        terms: termsText,
+        category: category
+      }),
     });
 
     if (!response.ok) {
@@ -46,19 +51,23 @@ export const analyzeTerms = async (termsText) => {
 /**
  * Uploads and analyzes terms from a file
  * @param {File} file - The file containing terms text
+ * @param {string} category - The category of terms (optional)
  * @returns {Promise} Analysis result
  */
-export const analyzeTermsFromFile = async (file) => {
+export const analyzeTermsFromFile = async (file, category) => {
   // Read file content
   const text = await readFileAsText(file);
 
-  // Analyze the text
-  return analyzeTerms(text);
+  // Analyze the text with category
+  return analyzeTerms(text, category);
 
   // When backend supports direct file upload, use this instead:
   /*
   const formData = new FormData();
   formData.append('file', file);
+  if (category) {
+    formData.append('category', category);
+  }
 
   try {
     const response = await fetch('YOUR_API_ENDPOINT/analyze-file', {

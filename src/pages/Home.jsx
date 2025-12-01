@@ -13,7 +13,7 @@ function Home() {
   const [questions, setQuestions] = useState([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
 
-  const handleAnalyze = async (input, type) => {
+  const handleAnalyze = async (input, type, category) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
@@ -22,9 +22,9 @@ function Home() {
     try {
       let result;
       if (type === 'text') {
-        result = await analyzeTerms(input);
+        result = await analyzeTerms(input, category);
       } else {
-        result = await analyzeTermsFromFile(input);
+        result = await analyzeTermsFromFile(input, category);
       }
       setAnalysisResult(result);
     } catch (err) {
