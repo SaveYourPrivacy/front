@@ -14,11 +14,24 @@
 }
 
 .unfair-clause-item {
-  background-color: #fef2f2;
-  border-left: 4px solid #dc2626;
   border-radius: 4px;
   padding: 1.25rem;
   margin-bottom: 1.5rem;
+}
+
+.unfair-clause-item.severity-high {
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
+}
+
+.unfair-clause-item.severity-medium {
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+
+.unfair-clause-item.severity-low {
+  background-color: #f0fdf4;
+  border-left: 4px solid #10b981;
 }
 
 .unfair-clause-item:last-child {
@@ -35,8 +48,19 @@
 .unfair-clause-number {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #dc2626;
   margin: 0;
+}
+
+.severity-high .unfair-clause-number {
+  color: #dc2626;
+}
+
+.severity-medium .unfair-clause-number {
+  color: #f59e0b;
+}
+
+.severity-low .unfair-clause-number {
+  color: #10b981;
 }
 
 .unfair-clause-text {
@@ -50,8 +74,19 @@
 }
 
 .unfair-clause-issues {
-  border-top: 1px solid #fecaca;
   padding-top: 1rem;
+}
+
+.severity-high .unfair-clause-issues {
+  border-top: 1px solid #fecaca;
+}
+
+.severity-medium .unfair-clause-issues {
+  border-top: 1px solid #fed7aa;
+}
+
+.severity-low .unfair-clause-issues {
+  border-top: 1px solid #bbf7d0;
 }
 
 .unfair-clause-issue {
@@ -72,16 +107,39 @@
 .unfair-clause-issue-type {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: #991b1b;
   margin: 0;
+}
+
+.severity-high .unfair-clause-issue-type {
+  color: #991b1b;
+}
+
+.severity-medium .unfair-clause-issue-type {
+  color: #b45309;
+}
+
+.severity-low .unfair-clause-issue-type {
+  color: #065f46;
 }
 
 .unfair-clause-issue-severity {
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
-  background-color: #dc2626;
   color: #ffffff;
   border-radius: 3px;
+  font-weight: 500;
+}
+
+.severity-badge-high {
+  background-color: #dc2626;
+}
+
+.severity-badge-medium {
+  background-color: #f59e0b;
+}
+
+.severity-badge-low {
+  background-color: #10b981;
 }
 
 .unfair-clause-issue-description {

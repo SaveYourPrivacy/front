@@ -68,6 +68,14 @@ function Home() {
 
  return (
  <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+ <div style={{ marginBottom: '2rem' }}>
+   <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#1f2937', marginBottom: '0.5rem' }}>
+     소비자용 약관 분석
+   </h2>
+   <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+     AI가 약관의 불공정 조항을 찾아드립니다
+   </p>
+ </div>
  <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} />
  <AnalysisResult result={analysisResult} isLoading={isLoading} error={error} />
  {analysisResult && (

@@ -26,9 +26,9 @@ export const sampleTermsText = `제1조 (목적)
 export const sampleAnalysisResult = {
   summary: {
     title: "약관 분석 요약",
-    overview: "총 6개 조항 중 3개 조항에서 소비자에게 불리한 불공정 조항이 발견되었습니다.",
+    overview: "총 6개 조항 중 5개 조항에서 소비자에게 불리한 불공정 조항이 발견되었습니다. 특히 약관 변경 및 개인정보 제3자 제공 조항에서 심각한 문제가 발견되었습니다.",
     totalClauses: 6,
-    unfairCount: 3,
+    unfairCount: 5,
     riskLevel: "높음"
   },
   termsSummary: {
@@ -71,6 +71,12 @@ export const sampleAnalysisResult = {
           description: "개인정보를 제3자에게 제공하기 위해서는 명시적 동의가 필요하나, 이를 일방적으로 규정하고 있습니다.",
           severity: "높음",
           relatedLaw: "개인정보 보호법 제17조"
+        },
+        {
+          type: "법률 위반",
+          description: "GDPR 및 개인정보보호법에서 요구하는 명시적 동의 절차가 누락되어 있습니다.",
+          severity: "높음",
+          relatedLaw: "GDPR Article 6"
         }
       ]
     },
@@ -86,11 +92,38 @@ export const sampleAnalysisResult = {
           relatedLaw: "약관의 규제에 관한 법률 제7조"
         }
       ]
+    },
+    {
+      id: 4,
+      clauseNumber: "제6조 제1항",
+      text: "본 약관과 관련된 분쟁은 회사의 본사 소재지 법원을 전속 관할 법원으로 합니다.",
+      issues: [
+        {
+          type: "관할권 제한",
+          description: "소비자의 주소지 법원이 아닌 회사 소재지 법원으로만 제한하는 것은 소비자에게 불리한 조항입니다.",
+          severity: "중간",
+          relatedLaw: "약관규제법 제14조"
+        }
+      ]
+    },
+    {
+      id: 5,
+      clauseNumber: "제2조 제3항",
+      text: "회사는 천재지변 등 불가항력적 사유로 서비스를 제공할 수 없는 경우 책임이 면제됩니다.",
+      issues: [
+        {
+          type: "정보성 조항",
+          description: "천재지변 등 불가항력으로 인한 면책은 법률상 당연한 내용으로, 크게 문제되지 않습니다.",
+          severity: "낮음",
+          relatedLaw: "민법 제750조"
+        }
+      ]
     }
   ],
   recommendations: [
     "약관 변경 시 최소 7일 전 사전 공지를 명시해야 합니다.",
     "개인정보 제3자 제공 시 별도의 명시적 동의 절차를 추가해야 합니다.",
-    "회사의 고의 또는 중과실로 인한 손해에 대해서는 책임을 지도록 수정해야 합니다."
+    "회사의 고의 또는 중과실로 인한 손해에 대해서는 책임을 지도록 수정해야 합니다.",
+    "관할 법원을 소비자의 선택에 따라 정할 수 있도록 변경하세요."
   ]
 };
