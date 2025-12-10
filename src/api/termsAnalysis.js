@@ -1,4 +1,5 @@
-import { sampleAnalysisResult } from '../mock/dummyData';
+// 백엔드 API URL 설정
+const API_BASE_URL = 'http://localhost:8000';
 
 /**
  * Analyzes terms text for unfair clauses
@@ -10,42 +11,29 @@ import { sampleAnalysisResult } from '../mock/dummyData';
  *   - unfairClauses: array of unfair clause objects
  *   - recommendations: array of recommendation strings
  */
-export const analyzeTerms = async (termsText, category) => {
-  // For development: using dummy data
-  // Remove this block and uncomment the API call when backend is ready
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('Terms Text:', termsText);
-      console.log('Category:', category);
-      resolve(sampleAnalysisResult);
-    }, 1500); // Simulate network delay
-  });
-
-  // Uncomment this block when backend API is ready
-  /*
+export const analyzeTerms = async (termsText, category = '기타') => {
   try {
-    const response = await fetch('YOUR_API_ENDPOINT/analyze', {
+    const response = await fetch(`${API_BASE_URL}/terms_analyze`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        terms: termsText,
+        term: termsText,
         category: category
       }),
     });
 
     if (!response.ok) {
-      throw new Error('Analysis failed');
+      throw new Error(`분석 실패: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error analyzing terms:', error);
+    console.error('약관 분석 중 오류 발생:', error);
     throw error;
   }
-  */
 };
 
 /**
