@@ -15,8 +15,9 @@ import QuestionBoard from './QuestionBoard';
  * - questions: array - List of questions and answers
  * - onAskQuestion: function - Handler for asking questions
  * - isLoadingQuestion: boolean - Loading state for questions
- * - emailContent: object - Cached email content
- * - setEmailContent: function - Setter for email content
+ * - emailContent: object - Cached email content (optional, for consumer only)
+ * - setEmailContent: function - Setter for email content (optional, for consumer only)
+ * - showEmailTab: boolean - Whether to show email template tab (default: true)
  */
 function ResultTabs({
   analysisResult,
@@ -26,7 +27,8 @@ function ResultTabs({
   onAskQuestion,
   isLoadingQuestion,
   emailContent,
-  setEmailContent
+  setEmailContent,
+  showEmailTab = true
 }) {
   const [activeTab, setActiveTab] = useState('analysis'); // 'analysis', 'email', 'questions'
 
@@ -55,15 +57,17 @@ function ResultTabs({
           </svg>
           분석 결과
         </button>
-        <button
-          className={`result-tab ${activeTab === 'email' ? 'active' : ''}`}
-          onClick={() => setActiveTab('email')}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 8L10.89 13.26C11.5639 13.7197 12.4361 13.7197 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          메일 템플릿
-        </button>
+        {showEmailTab && (
+          <button
+            className={`result-tab ${activeTab === 'email' ? 'active' : ''}`}
+            onClick={() => setActiveTab('email')}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8L10.89 13.26C11.5639 13.7197 12.4361 13.7197 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            민원 메일
+          </button>
+        )}
         <button
           className={`result-tab ${activeTab === 'questions' ? 'active' : ''}`}
           onClick={() => setActiveTab('questions')}
@@ -87,7 +91,7 @@ function ResultTabs({
           />
         )}
 
-        {activeTab === 'email' && (
+        {activeTab === 'email' && showEmailTab && (
           <ComplaintEmailTemplate
             analysisResult={analysisResult}
             emailContent={emailContent}

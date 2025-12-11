@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import TermsInput from '../components/home/TermsInput';
-import AnalysisResult from '../components/home/AnalysisResult';
-import QuestionBoard from '../components/home/QuestionBoard';
+import ResultTabs from '../components/home/ResultTabs';
 import { analyzeBusinessTerms, analyzeBusinessTermsFromFile } from '../api/businessAnalysis';
 import { askQuestion } from '../api/questionAnswer';
 
@@ -76,14 +75,15 @@ function BusinessAnalysis() {
         </p>
       </div>
       <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} />
-      <AnalysisResult result={analysisResult} isLoading={isLoading} error={error} />
-      {analysisResult && (
-        <QuestionBoard
-          onAskQuestion={handleAskQuestion}
-          questions={questions}
-          isLoading={isLoadingQuestion}
-        />
-      )}
+      <ResultTabs
+        analysisResult={analysisResult}
+        isLoading={isLoading}
+        error={error}
+        questions={questions}
+        onAskQuestion={handleAskQuestion}
+        isLoadingQuestion={isLoadingQuestion}
+        showEmailTab={false}
+      />
     </div>
   );
 }
