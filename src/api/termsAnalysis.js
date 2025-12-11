@@ -11,7 +11,7 @@ const API_BASE_URL = 'http://localhost:8000';
  *   - unfairClauses: array of unfair clause objects
  *   - recommendations: array of recommendation strings
  */
-export const analyzeTerms = async (termsText, category = '기타') => {
+export const analyzeTerms = async (termsText, category = '알반 약관') => {
   try {
     const response = await fetch(`${API_BASE_URL}/terms_analyze`, {
       method: 'POST',
@@ -42,38 +42,34 @@ export const analyzeTerms = async (termsText, category = '기타') => {
  * @param {string} category - The category of terms (optional)
  * @returns {Promise} Analysis result
  */
-export const analyzeTermsFromFile = async (file, category) => {
-  // Read file content
-  const text = await readFileAsText(file);
-
-  // Analyze the text with category
-  return analyzeTerms(text, category);
-
-  // When backend supports direct file upload, use this instead:
-  /*
-  const formData = new FormData();
-  formData.append('file', file);
-  if (category) {
-    formData.append('category', category);
-  }
-
+export const analyzeTermsFromFile = async (file, category = '일반 약관') => {
   try {
-    const response = await fetch('YOUR_API_ENDPOINT/analyze-file', {
-      method: 'POST',
-      body: formData,
-    });
+    // PDF 파일인 경우 백엔드 PDF 엔드포인트 사용
+    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('category', category);
 
-    if (!response.ok) {
-      throw new Error('File analysis failed');
+      const response = await fetch(`${API_BASE_URL}/terms_analyze/pdf`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`PDF 분석 실패: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data;
     }
 
-    const data = await response.json();
-    return data;
+    // 텍스트 파일인 경우 파일 내용을 읽어서 텍스트 분석 API 호출
+    const text = await readFileAsText(file);
+    return analyzeTerms(text, category);
   } catch (error) {
-    console.error('Error analyzing file:', error);
+    console.error('파일 분석 중 오류 발생:', error);
     throw error;
   }
-  */
 };
 
 /**

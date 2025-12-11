@@ -72,10 +72,27 @@ export async function analyzeBusinessTerms(termsText, category = '일반 약관'
  */
 export async function analyzeBusinessTermsFromFile(file, category = '일반 약관') {
   try {
-    // 파일 내용을 텍스트로 읽기
-    const fileText = await file.text();
+    // PDF 파일인 경우 백엔드 PDF 엔드포인트 사용
+    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('category', category);
 
-    // 텍스트 분석 API 호출
+      const response = await fetch(`${API_BASE_URL}/company_terms_analyze/pdf`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`PDF 분석 실패: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return transformCompanyAnalysisResponse(data);
+    }
+
+    // 텍스트 파일인 경우 파일 내용을 읽어서 텍스트 분석 API 호출
+    const fileText = await file.text();
     return await analyzeBusinessTerms(fileText, category);
   } catch (error) {
     console.error('파일 분석 중 오류 발생:', error);
