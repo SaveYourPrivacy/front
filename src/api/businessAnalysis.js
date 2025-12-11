@@ -88,35 +88,33 @@ export async function analyzeBusinessTerms(termsText, category = '일반 약관'
 }
 
 /**
- * Analyzes terms from uploaded file for business vulnerabilities
- * @param {File} file - The file to analyze
+ * Analyzes terms from uploaded PDF file for business vulnerabilities
+ * @param {File} file - The PDF file to analyze
  * @param {string} category - The category of terms (optional)
  * @returns {Promise<Object>} Analysis result with vulnerabilities
  */
 export async function analyzeBusinessTermsFromFile(file, category = '일반 약관') {
   try {
-    // PDF 파일인 경우 백엔드 PDF 엔드포인트 사용
-    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('category', category);
-
-      const response = await fetch(`${API_BASE_URL}/company_terms_analyze/pdf`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`PDF 분석 실패: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      return transformCompanyAnalysisResponse(data);
+    // PDF 파일 검증
+    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+      throw new Error('PDF 파일만 업로드할 수 있습니다.');
     }
 
-    // 텍스트 파일인 경우 파일 내용을 읽어서 텍스트 분석 API 호출
-    const fileText = await file.text();
-    return await analyzeBusinessTerms(fileText, category);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('category', category);
+
+    const response = await fetch(`${API_BASE_URL}/company_terms_analyze/pdf`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`PDF 분석 실패: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return transformCompanyAnalysisResponse(data);
   } catch (error) {
     console.error('파일 분석 중 오류 발생:', error);
     throw error;

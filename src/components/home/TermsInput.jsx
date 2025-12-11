@@ -20,7 +20,13 @@ function TermsInput({ onAnalyze, isLoading }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file);
+      // PDF 파일만 허용
+      if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+        setSelectedFile(file);
+      } else {
+        alert('PDF 파일만 업로드할 수 있습니다.');
+        e.target.value = ''; // 파일 입력 초기화
+      }
     }
   };
 
@@ -93,23 +99,58 @@ function TermsInput({ onAnalyze, isLoading }) {
         </div>
       ) : (
         <div className="terms-input-file-area">
-          <input
-            type="file"
-            id="terms-file-input"
-            className="terms-input-file-input"
-            accept=".txt,.pdf,.doc,.docx"
-            onChange={handleFileChange}
-          />
-          <label htmlFor="terms-file-input" className="terms-input-file-label">
-            파일 선택
-          </label>
-          <p className="terms-input-file-info">
-            TXT, PDF, DOC, DOCX 파일을 업로드할 수 있습니다
-          </p>
-          {selectedFile && (
-            <p className="terms-input-file-name">
-              선택된 파일: {selectedFile.name}
-            </p>
+          {!selectedFile ? (
+            <>
+              <input
+                type="file"
+                id="terms-file-input"
+                className="terms-input-file-input"
+                accept=".pdf,application/pdf"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="terms-file-input" className="terms-input-file-label">
+                파일 선택
+              </label>
+              <p className="terms-input-file-info">
+                PDF 파일만 업로드할 수 있습니다
+              </p>
+            </>
+          ) : (
+            <div className="terms-input-file-selected">
+              <div className="terms-input-file-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#dc2626"/>
+                  <path d="M14 2V8H20" fill="#b91c1c"/>
+                  <text x="12" y="16" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">PDF</text>
+                </svg>
+              </div>
+              <div className="terms-input-file-details">
+                <p className="terms-input-file-name-styled">{selectedFile.name}</p>
+                <p className="terms-input-file-size">
+                  {(selectedFile.size / 1024).toFixed(2)} KB
+                </p>
+              </div>
+              <button
+                type="button"
+                className="terms-input-file-remove"
+                onClick={() => {
+                  setSelectedFile(null);
+                  document.getElementById('terms-file-input').value = '';
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+              <input
+                type="file"
+                id="terms-file-input"
+                className="terms-input-file-input"
+                accept=".pdf,application/pdf"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />
+            </div>
           )}
         </div>
       )}
