@@ -1,0 +1,209 @@
+.abuse-scenarios {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.abuse-scenarios-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.abuse-scenarios-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 1.5rem 0;
+}
+
+.abuse-scenario-item {
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.abuse-scenario-item.severity-high {
+  background-color: #fef2f2;
+  border-left: 4px solid #dc2626;
+}
+
+.abuse-scenario-item.severity-medium {
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+
+.abuse-scenario-item.severity-low {
+  background-color: #f0fdf4;
+  border-left: 4px solid #10b981;
+}
+
+.abuse-scenario-item:last-child {
+  margin-bottom: 0;
+}
+
+.abuse-scenario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.abuse-scenario-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.severity-high .abuse-scenario-title {
+  color: #dc2626;
+}
+
+.severity-medium .abuse-scenario-title {
+  color: #f59e0b;
+}
+
+.severity-low .abuse-scenario-title {
+  color: #10b981;
+}
+
+.abuse-scenario-severity {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  border-radius: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.severity-badge-high {
+  background-color: #dc2626;
+}
+
+.severity-badge-medium {
+  background-color: #f59e0b;
+}
+
+.severity-badge-low {
+  background-color: #10b981;
+}
+
+.abuse-scenario-content {
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.abuse-scenario-section {
+  margin-bottom: 1rem;
+}
+
+.abuse-scenario-section:last-child {
+  margin-bottom: 0;
+}
+
+.abuse-scenario-section-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.severity-high .abuse-scenario-section-title {
+  color: #991b1b;
+}
+
+.severity-medium .abuse-scenario-section-title {
+  color: #b45309;
+}
+
+.severity-low .abuse-scenario-section-title {
+  color: #065f46;
+}
+
+.abuse-scenario-section-text {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.abuse-scenario-clauses-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.abuse-scenario-clause-item {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 0.25rem;
+}
+
+.abuse-scenario-clause-item:last-child {
+  margin-bottom: 0;
+}
+
+.abuse-scenario-cases-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.abuse-scenario-case-item {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.abuse-scenario-case-item:last-child {
+  margin-bottom: 0;
+}
+
+.abuse-scenario-case-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.abuse-scenario-case-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.abuse-scenario-case-link:visited {
+  color: #7c3aed;
+}
+
+.abuse-scenario-case-description {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+@media (max-width: 768px) {
+  .abuse-scenarios {
+    padding: 1rem;
+  }
+
+  .abuse-scenario-item {
+    padding: 1rem;
+  }
+
+  .abuse-scenario-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .abuse-scenario-severity {
+    align-self: flex-start;
+  }
+}

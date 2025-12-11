@@ -3,6 +3,8 @@
  * Analyzes terms for vulnerabilities and exploitation risks from a business perspective
  */
 
+import { sampleAbuseScenarios } from '../mock/dummyData';
+
 // 백엔드 API URL 설정
 const API_BASE_URL = 'http://localhost:8000';
 
@@ -10,6 +12,25 @@ const API_BASE_URL = 'http://localhost:8000';
  * 백엔드 응답 형식을 프론트엔드 형식으로 변환
  * @param {Object} backendData - 백엔드에서 받은 데이터
  * @returns {Object} 프론트엔드 형식의 데이터
+ *
+ * Expected backend data structure for abuseScenarios:
+ * backendData.abuseScenarios = [
+ *   {
+ *     title: string,              // 시나리오 제목
+ *     severity: "높음"|"중간"|"낮음",  // 심각도
+ *     scenario: string,            // 악용 시나리오 설명
+ *     relatedClauses: string[],    // 관련 약관 조항들 (optional)
+ *     potentialDamage: string,     // 예상 피해
+ *     preventionMeasures: string,  // 예방 조치 (optional)
+ *     realCases: [                 // 실제 사례 (optional)
+ *       {
+ *         title: string,           // 사례 제목
+ *         url: string,             // 참고 링크 URL
+ *         description: string      // 사례 설명 (optional)
+ *       }
+ *     ]
+ *   }
+ * ]
  */
 function transformCompanyAnalysisResponse(backendData) {
   return {
@@ -27,7 +48,9 @@ function transformCompanyAnalysisResponse(backendData) {
     },
     unfairClauses: backendData.vulnerabilities || [],
     recommendations: backendData.recommendations || [],
-    worstScenario: backendData.worstScenario || ""
+    worstScenario: backendData.worstScenario || "",
+    // 백엔드에서 abuseScenarios를 제공하지 않으면 더미 데이터 사용
+    abuseScenarios: backendData.abuseScenarios || sampleAbuseScenarios
   };
 }
 
