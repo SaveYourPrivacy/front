@@ -5,19 +5,26 @@ import '../../styles/home/complaintEmailTemplate.css';
 /**
  * ComplaintEmailTemplate Component
  * Generates and displays a complaint email template based on analysis results
+ * Now with caching - prevents duplicate API calls
  *
  * Props:
  * - analysisResult: object - Contains summary, unfairClauses, and recommendations from terms analysis
+ * - emailContent: object - Cached email content from parent
+ * - setEmailContent: function - Setter for email content in parent
  */
-function ComplaintEmailTemplate({ analysisResult }) {
-  const [emailContent, setEmailContent] = useState(null);
+function ComplaintEmailTemplate({ analysisResult, emailContent, setEmailContent }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  // Fetch email content from API when component mounts or analysisResult changes
+  // Fetch email content from API only once when component mounts (with caching)
   useEffect(() => {
     const fetchEmailContent = async () => {
+      // Skip if already loaded (check cached emailContent from parent)
+      if (emailContent || !analysisResult) {
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
 
@@ -32,10 +39,8 @@ function ComplaintEmailTemplate({ analysisResult }) {
       }
     };
 
-    if (analysisResult) {
-      fetchEmailContent();
-    }
-  }, [analysisResult]);
+    fetchEmailContent();
+  }, [analysisResult, emailContent, setEmailContent]);
 
   // Copy email to clipboard
   const handleCopyEmail = async () => {

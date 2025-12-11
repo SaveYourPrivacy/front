@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import TermsInput from '../components/home/TermsInput';
-import AnalysisResult from '../components/home/AnalysisResult';
-import ComplaintEmailTemplate from '../components/home/ComplaintEmailTemplate';
-import QuestionBoard from '../components/home/QuestionBoard';
+import ResultTabs from '../components/home/ResultTabs';
 import { analyzeTerms, analyzeTermsFromFile } from '../api/termsAnalysis';
 import { askQuestion } from '../api/questionAnswer';
 
@@ -12,12 +10,14 @@ function Home() {
   const [error, setError] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+  const [emailContent, setEmailContent] = useState(null); // 이메일 컨텐츠 캐싱
 
   const handleAnalyze = async (input, type, category) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
     setQuestions([]); // Reset questions when analyzing new terms
+    setEmailContent(null); // Reset email content when analyzing new terms
 
     try {
       let result;
@@ -77,17 +77,16 @@ function Home() {
    </p>
  </div>
  <TermsInput onAnalyze={handleAnalyze} isLoading={isLoading} />
- <AnalysisResult result={analysisResult} isLoading={isLoading} error={error} />
- {analysisResult && (
-   <>
-     <ComplaintEmailTemplate analysisResult={analysisResult} />
-     <QuestionBoard
-       onAskQuestion={handleAskQuestion}
-       questions={questions}
-       isLoading={isLoadingQuestion}
-     />
-   </>
- )}
+ <ResultTabs
+   analysisResult={analysisResult}
+   isLoading={isLoading}
+   error={error}
+   questions={questions}
+   onAskQuestion={handleAskQuestion}
+   isLoadingQuestion={isLoadingQuestion}
+   emailContent={emailContent}
+   setEmailContent={setEmailContent}
+ />
  </div>
  );
 }

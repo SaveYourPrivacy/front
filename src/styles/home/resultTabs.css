@@ -1,0 +1,133 @@
+.result-tabs-container {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.result-tabs-header {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.result-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #6b7280;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.result-tab:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
+.result-tab.active {
+  color: #1f2937;
+  background-color: #ffffff;
+  border-bottom-color: #1f2937;
+}
+
+.result-tab svg {
+  flex-shrink: 0;
+}
+
+.result-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background-color: #dc2626;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  line-height: 1;
+}
+
+.result-tabs-content {
+  padding: 0;
+}
+
+/* Content area adjustments - remove double padding */
+.result-tabs-content > div {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Adjust AnalysisResult padding inside tabs */
+.result-tabs-content .analysis-result-container {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Adjust ComplaintEmailTemplate padding inside tabs */
+.result-tabs-content .complaint-email-template {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Adjust QuestionBoard padding inside tabs */
+.result-tabs-content .question-board {
+  margin-bottom: 0;
+  border: none;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .result-tabs-header {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .result-tab {
+    flex: 0 0 auto;
+    min-width: 120px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .result-tab svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .result-tab-badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-tab {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .result-tab svg {
+    width: 16px;
+    height: 16px;
+  }
+}
