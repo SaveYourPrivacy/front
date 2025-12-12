@@ -1,11 +1,13 @@
+/* Main Container */
 .abuse-scenarios {
   background-color: #ffffff;
-  border-top: 1px solid #e5e7eb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
+/* Header Section */
 .abuse-scenarios-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -14,41 +16,45 @@
 }
 
 .abuse-scenarios-description {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: #6b7280;
   margin: 0 0 1.5rem 0;
+  line-height: 1.5;
 }
 
+/* Single Scenario Container */
 .abuse-scenario-single {
   background-color: #f9fafb;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1.5rem;
+  border-radius: 6px;
+  padding: 1.25rem;
 }
 
+/* Scenario Content Section */
 .abuse-scenario-content-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .abuse-scenario-content-title {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #374151;
   margin: 0 0 0.75rem 0;
 }
 
 .abuse-scenario-text {
-  font-size: 0.9375rem;
-  color: #374151;
-  line-height: 1.7;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.6;
   margin: 0;
   white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Similar Cases Section */
 .abuse-scenario-cases-section {
-  padding-top: 2rem;
-  border-top: 2px solid #e5e7eb;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
 }
 
 .abuse-scenario-cases-list {
@@ -57,6 +63,7 @@
   gap: 0.75rem;
 }
 
+/* Case Item */
 .abuse-scenario-case-item {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
@@ -68,31 +75,33 @@
 .abuse-scenario-case-item:hover {
   border-color: #2563eb;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-  transform: translateX(2px);
+  transform: translateY(-1px);
 }
 
 .abuse-scenario-case-link {
   display: block;
-  padding: 1rem 1.25rem;
+  padding: 1rem;
   text-decoration: none;
   color: inherit;
 }
 
+/* Case Header */
 .abuse-scenario-case-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
 
 .abuse-scenario-case-title {
   font-weight: 600;
   color: #2563eb;
-  font-size: 0.9375rem;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.5;
   transition: color 0.2s;
   flex: 1;
+  margin: 0;
 }
 
 .abuse-scenario-case-link:hover .abuse-scenario-case-title {
@@ -112,8 +121,8 @@
 
 .abuse-scenario-case-description {
   color: #6b7280;
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: 0.8125rem;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -123,8 +132,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  color: #6b7280;
+  padding: 2rem 1rem;
+  background-color: #ffffff;
+  border-radius: 6px;
 }
 
 .abuse-scenario-loading-spinner {
@@ -145,14 +155,15 @@
 
 .abuse-scenario-cases-loading p {
   margin: 0;
-  font-size: 0.875rem;
+  color: #6b7280;
+  font-size: 0.9375rem;
 }
 
 /* Empty State */
 .abuse-scenario-cases-empty {
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #f9fafb;
   border: 1px dashed #d1d5db;
   border-radius: 6px;
 }
@@ -161,11 +172,22 @@
   margin: 0;
   color: #6b7280;
   font-size: 0.875rem;
+  line-height: 1.5;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
   .abuse-scenarios {
     padding: 1rem;
+  }
+
+  .abuse-scenarios-title {
+    font-size: 1.125rem;
+  }
+
+  .abuse-scenarios-description {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
   }
 
   .abuse-scenario-single {
@@ -173,22 +195,27 @@
   }
 
   .abuse-scenario-content-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .abuse-scenario-cases-section {
-    padding-top: 1.5rem;
+    padding-top: 1rem;
   }
 
   .abuse-scenario-case-link {
-    padding: 0.875rem 1rem;
+    padding: 0.875rem;
   }
 
   .abuse-scenario-case-title {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .abuse-scenario-case-description {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+  }
+
+  .abuse-scenario-cases-loading,
+  .abuse-scenario-cases-empty {
+    padding: 1.5rem 1rem;
   }
 }
