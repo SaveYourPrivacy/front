@@ -83,6 +83,7 @@ function BusinessAnalysis() {
         onAskQuestion={handleAskQuestion}
         isLoadingQuestion={isLoadingQuestion}
         showEmailTab={false}
+        showScenariosTab={true}
       />
     </div>
   );

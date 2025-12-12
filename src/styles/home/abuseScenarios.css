@@ -3,6 +3,7 @@
   border-top: 1px solid #e5e7eb;
   padding: 1.5rem;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .abuse-scenarios-title {
@@ -145,46 +146,89 @@
   margin-bottom: 0;
 }
 
-.abuse-scenario-cases-list {
-  margin: 0;
-  padding-left: 1.25rem;
+/* Analysis Section */
+.abuse-scenario-analysis {
+  margin-bottom: 1.5rem;
 }
 
-.abuse-scenario-case-item {
-  color: #4b5563;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+/* Real Cases Section */
+.abuse-scenario-real-cases {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e5e7eb;
 }
 
-.abuse-scenario-case-item:last-child {
-  margin-bottom: 0;
+.abuse-scenario-real-cases-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.abuse-scenario-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.abuse-scenario-case-card {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.abuse-scenario-case-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+  transform: translateY(-1px);
 }
 
 .abuse-scenario-case-link {
-  color: #2563eb;
+  display: block;
+  padding: 1rem;
   text-decoration: none;
-  font-weight: 500;
+  color: inherit;
+  position: relative;
+  min-height: 100px;
+}
+
+.abuse-scenario-case-title {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  padding-right: 1.5rem;
   transition: color 0.2s;
 }
 
-.abuse-scenario-case-link:hover {
+.abuse-scenario-case-link:hover .abuse-scenario-case-title {
   color: #1d4ed8;
-  text-decoration: underline;
-}
-
-.abuse-scenario-case-link:visited {
-  color: #7c3aed;
 }
 
 .abuse-scenario-case-description {
   color: #6b7280;
   font-size: 0.8125rem;
   line-height: 1.5;
-  padding-left: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.abuse-scenario-case-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #9ca3af;
+  transition: all 0.2s;
+}
+
+.abuse-scenario-case-link:hover .abuse-scenario-case-icon {
+  color: #2563eb;
+  transform: translate(2px, -2px);
 }
 
 @media (max-width: 768px) {
@@ -204,5 +248,14 @@
 
   .abuse-scenario-severity {
     align-self: flex-start;
+  }
+
+  .abuse-scenario-cases-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .abuse-scenario-real-cases {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
   }
 }

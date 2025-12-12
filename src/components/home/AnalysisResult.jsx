@@ -1,7 +1,6 @@
 import '../../styles/home/analysisResult.css';
 import ResultSummary from './ResultSummary';
 import UnfairClauses from './UnfairClauses';
-import AbuseScenarios from './AbuseScenarios';
 
 /**
  * AnalysisResult Component
@@ -46,7 +45,6 @@ function AnalysisResult({ result, isLoading, error }) {
         unfairClauses={result.unfairClauses}
         recommendations={result.recommendations}
       />
-      <AbuseScenarios abuseScenarios={result.abuseScenarios} />
     </div>
   );
 }

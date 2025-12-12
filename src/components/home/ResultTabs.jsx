@@ -3,6 +3,7 @@ import '../../styles/home/resultTabs.css';
 import AnalysisResult from './AnalysisResult';
 import ComplaintEmailTemplate from './ComplaintEmailTemplate';
 import QuestionBoard from './QuestionBoard';
+import AbuseScenarios from './AbuseScenarios';
 
 /**
  * ResultTabs Component
@@ -18,6 +19,7 @@ import QuestionBoard from './QuestionBoard';
  * - emailContent: object - Cached email content (optional, for consumer only)
  * - setEmailContent: function - Setter for email content (optional, for consumer only)
  * - showEmailTab: boolean - Whether to show email template tab (default: true)
+ * - showScenariosTab: boolean - Whether to show abuse scenarios tab (default: false)
  */
 function ResultTabs({
   analysisResult,
@@ -28,9 +30,10 @@ function ResultTabs({
   isLoadingQuestion,
   emailContent,
   setEmailContent,
-  showEmailTab = true
+  showEmailTab = true,
+  showScenariosTab = false
 }) {
-  const [activeTab, setActiveTab] = useState('analysis'); // 'analysis', 'email', 'questions'
+  const [activeTab, setActiveTab] = useState('analysis'); // 'analysis', 'scenarios', 'email', 'questions'
 
   if (isLoading || error || !analysisResult) {
     return (
@@ -57,6 +60,17 @@ function ResultTabs({
           </svg>
           분석 결과
         </button>
+        {showScenariosTab && (
+          <button
+            className={`result-tab ${activeTab === 'scenarios' ? 'active' : ''}`}
+            onClick={() => setActiveTab('scenarios')}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0377 2.66667 10.2679 4L3.33975 16C2.56995 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            악용 시나리오
+          </button>
+        )}
         {showEmailTab && (
           <button
             className={`result-tab ${activeTab === 'email' ? 'active' : ''}`}
@@ -89,6 +103,10 @@ function ResultTabs({
             isLoading={false}
             error={null}
           />
+        )}
+
+        {activeTab === 'scenarios' && showScenariosTab && (
+          <AbuseScenarios abuseScenarios={analysisResult.abuseScenarios} />
         )}
 
         {activeTab === 'email' && showEmailTab && (
