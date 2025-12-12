@@ -3,8 +3,6 @@
  * Analyzes terms for vulnerabilities and exploitation risks from a business perspective
  */
 
-import { sampleAbuseScenarios } from '../mock/dummyData';
-
 // 백엔드 API URL 설정
 const API_BASE_URL = 'http://localhost:8000';
 
@@ -49,8 +47,6 @@ function transformCompanyAnalysisResponse(backendData) {
     unfairClauses: backendData.vulnerabilities || [],
     recommendations: backendData.recommendations || [],
     worstScenario: backendData.worstScenario || "",
-    // 백엔드에서 abuseScenarios를 제공하지 않으면 더미 데이터 사용
-    abuseScenarios: backendData.abuseScenarios || sampleAbuseScenarios
   };
 }
 

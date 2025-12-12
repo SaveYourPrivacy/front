@@ -1,22 +1,57 @@
+import { useState, useEffect } from 'react';
 import '../../styles/home/abuseScenarios.css';
+import { fetchSimilarCases } from '../../api/similarCases';
 
 /**
  * AbuseScenarios Component
- * Displays analysis scenarios with similar real cases
+ * Displays worst scenario and fetches similar real cases from API
+ * Now with caching - prevents duplicate API calls
  *
  * Props:
- * - abuseScenarios: array - List of scenario objects from analysis with real cases
+ * - worstScenario: string - Worst scenario text from analysis result
+ * - similarCases: array - Cached similar cases from parent
+ * - setSimilarCases: function - Setter for similar cases in parent
  */
-function AbuseScenarios({ abuseScenarios }) {
-  if (!abuseScenarios || abuseScenarios.length === 0) {
+function AbuseScenarios({ worstScenario, similarCases, setSimilarCases }) {
+  const [realCases, setRealCases] = useState([]);
+  const [isLoadingCases, setIsLoadingCases] = useState(false);
+
+  // Fetch similar real cases when worst scenario is provided (with caching)
+  useEffect(() => {
+    const loadSimilarCases = async () => {
+      if (!worstScenario) {
+        return;
+      }
+
+      // Skip if already loaded (check cached similarCases from parent)
+      if (similarCases) {
+        setRealCases(similarCases);
+        return;
+      }
+
+      setIsLoadingCases(true);
+      try {
+        // Pass worst scenario text to API
+        const cases = await fetchSimilarCases(worstScenario);
+        setRealCases(cases);
+        // Cache the result in parent
+        if (setSimilarCases) {
+          setSimilarCases(cases);
+        }
+      } catch (error) {
+        console.error('Failed to load similar cases:', error);
+        setRealCases([]);
+      } finally {
+        setIsLoadingCases(false);
+      }
+    };
+
+    loadSimilarCases();
+  }, [worstScenario, similarCases, setSimilarCases]);
+
+  if (!worstScenario) {
     return null;
   }
-
-  const getSeverityClass = (severity) => {
-    if (severity === '높음') return 'high';
-    if (severity === '중간') return 'medium';
-    return 'low';
-  };
 
   return (
     <div className="abuse-scenarios">
@@ -25,86 +60,52 @@ function AbuseScenarios({ abuseScenarios }) {
         분석 결과를 바탕으로 도출된 악용 시나리오와 유사한 실제 사례를 제시합니다
       </p>
 
-      {abuseScenarios.map((scenario, index) => {
-        const severityClass = getSeverityClass(scenario.severity);
+      <div className="abuse-scenario-single">
+        {/* Scenario Section */}
+        <div className="abuse-scenario-content-section">
+          <h3 className="abuse-scenario-content-title">시나리오</h3>
+          <p className="abuse-scenario-text">{worstScenario}</p>
+        </div>
 
-        return (
-          <div key={index} className={`abuse-scenario-item severity-${severityClass}`}>
-            <div className="abuse-scenario-header">
-              <h3 className="abuse-scenario-title">{scenario.title}</h3>
-              <span className={`abuse-scenario-severity severity-badge-${severityClass}`}>
-                위험도: {scenario.severity}
-              </span>
+        {/* Similar Real Cases Section */}
+        <div className="abuse-scenario-cases-section">
+          <h3 className="abuse-scenario-content-title">유사한 실제 사례</h3>
+
+          {isLoadingCases ? (
+            <div className="abuse-scenario-cases-loading">
+              <div className="abuse-scenario-loading-spinner"></div>
+              <p>유사 사례를 검색하고 있습니다...</p>
             </div>
-
-            <div className="abuse-scenario-content">
-              {/* Analysis Scenario Section */}
-              <div className="abuse-scenario-analysis">
-                <div className="abuse-scenario-section">
-                  <h4 className="abuse-scenario-section-title">악용 시나리오</h4>
-                  <p className="abuse-scenario-section-text">{scenario.scenario}</p>
+          ) : realCases && realCases.length > 0 ? (
+            <div className="abuse-scenario-cases-list">
+              {realCases.map((realCase, idx) => (
+                <div key={idx} className="abuse-scenario-case-item">
+                  <a
+                    href={realCase.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="abuse-scenario-case-link"
+                  >
+                    <div className="abuse-scenario-case-header">
+                      <span className="abuse-scenario-case-title">{realCase.title}</span>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="abuse-scenario-case-icon">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    {realCase.description && (
+                      <p className="abuse-scenario-case-description">{realCase.description}</p>
+                    )}
+                  </a>
                 </div>
-
-                {scenario.relatedClauses && scenario.relatedClauses.length > 0 && (
-                  <div className="abuse-scenario-section">
-                    <h4 className="abuse-scenario-section-title">관련 약관</h4>
-                    <ul className="abuse-scenario-clauses-list">
-                      {scenario.relatedClauses.map((clause, idx) => (
-                        <li key={idx} className="abuse-scenario-clause-item">
-                          {clause}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="abuse-scenario-section">
-                  <h4 className="abuse-scenario-section-title">예상 피해</h4>
-                  <p className="abuse-scenario-section-text">{scenario.potentialDamage}</p>
-                </div>
-
-                {scenario.preventionMeasures && (
-                  <div className="abuse-scenario-section">
-                    <h4 className="abuse-scenario-section-title">예방 조치</h4>
-                    <p className="abuse-scenario-section-text">{scenario.preventionMeasures}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Similar Real Cases Section */}
-              {scenario.realCases && scenario.realCases.length > 0 && (
-                <div className="abuse-scenario-real-cases">
-                  <h4 className="abuse-scenario-real-cases-title">유사한 실제 사례</h4>
-                  <div className="abuse-scenario-cases-grid">
-                    {scenario.realCases.map((realCase, idx) => (
-                      <div key={idx} className="abuse-scenario-case-card">
-                        <a
-                          href={realCase.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="abuse-scenario-case-link"
-                        >
-                          <div className="abuse-scenario-case-title">{realCase.title}</div>
-                          {realCase.description && (
-                            <div className="abuse-scenario-case-description">
-                              {realCase.description}
-                            </div>
-                          )}
-                          <div className="abuse-scenario-case-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              ))}
             </div>
-          </div>
-        );
-      })}
+          ) : (
+            <div className="abuse-scenario-cases-empty">
+              <p>유사한 실제 사례를 찾지 못했습니다.</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

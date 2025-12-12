@@ -10,12 +10,14 @@ function BusinessAnalysis() {
   const [error, setError] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+  const [similarCases, setSimilarCases] = useState(null); // 유사 사례 캐싱
 
   const handleAnalyze = async (input, type) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
     setQuestions([]); // Reset questions when analyzing new terms
+    setSimilarCases(null); // Reset similar cases when analyzing new terms
 
     try {
       let result;
@@ -84,6 +86,8 @@ function BusinessAnalysis() {
         isLoadingQuestion={isLoadingQuestion}
         showEmailTab={false}
         showScenariosTab={true}
+        similarCases={similarCases}
+        setSimilarCases={setSimilarCases}
       />
     </div>
   );

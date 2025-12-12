@@ -20,6 +20,8 @@ import AbuseScenarios from './AbuseScenarios';
  * - setEmailContent: function - Setter for email content (optional, for consumer only)
  * - showEmailTab: boolean - Whether to show email template tab (default: true)
  * - showScenariosTab: boolean - Whether to show abuse scenarios tab (default: false)
+ * - similarCases: array - Cached similar cases (optional, for business only)
+ * - setSimilarCases: function - Setter for similar cases (optional, for business only)
  */
 function ResultTabs({
   analysisResult,
@@ -31,7 +33,9 @@ function ResultTabs({
   emailContent,
   setEmailContent,
   showEmailTab = true,
-  showScenariosTab = false
+  showScenariosTab = false,
+  similarCases,
+  setSimilarCases
 }) {
   const [activeTab, setActiveTab] = useState('analysis'); // 'analysis', 'scenarios', 'email', 'questions'
 
@@ -106,7 +110,11 @@ function ResultTabs({
         )}
 
         {activeTab === 'scenarios' && showScenariosTab && (
-          <AbuseScenarios abuseScenarios={analysisResult.abuseScenarios} />
+          <AbuseScenarios
+            worstScenario={analysisResult.worstScenario}
+            similarCases={similarCases}
+            setSimilarCases={setSimilarCases}
+          />
         )}
 
         {activeTab === 'email' && showEmailTab && (
