@@ -73,7 +73,7 @@
 }
 
 .abuse-scenario-case-item:hover {
-  border-color: #2563eb;
+  border-color: #1f2937;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
   transform: translateY(-1px);
 }
@@ -105,7 +105,7 @@
 }
 
 .abuse-scenario-case-link:hover .abuse-scenario-case-title {
-  color: #1d4ed8;
+  color: #1f2937;
 }
 
 .abuse-scenario-case-icon {
@@ -115,7 +115,7 @@
 }
 
 .abuse-scenario-case-link:hover .abuse-scenario-case-icon {
-  color: #2563eb;
+  color: #1f2937;
   transform: translate(2px, -2px);
 }
 
