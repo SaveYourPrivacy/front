@@ -11,7 +11,7 @@ const API_BASE_URL = 'http://localhost:8000';
  *   - unfairClauses: array of unfair clause objects
  *   - recommendations: array of recommendation strings
  */
-export const analyzeTerms = async (termsText, category = '알반 약관') => {
+export const analyzeTerms = async (termsText, category = '일반 약관') => {
   try {
     const response = await fetch(`${API_BASE_URL}/terms_analyze`, {
       method: 'POST',

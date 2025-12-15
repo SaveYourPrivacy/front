@@ -28,7 +28,7 @@ function TermsCategorySelect({ onSelect }) {
                     <span>개인정보 수집 및 저장</span>
                 </div>
                 <div className="radio-item">
-                    <input type="radio" name="category" value="책임 제한" onChange={handleSelect} />
+                    <input type="radio" name="category" value="책임제한" onChange={handleSelect} />
                     <span>서비스 책임 제한 / 면책 조항</span>
                 </div>
                 <div className="radio-item">
