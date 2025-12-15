@@ -12,24 +12,25 @@ const API_BASE_URL = 'http://localhost:8000';
  * @param {Object} backendData - 백엔드 응답 데이터
  * @returns {Object} 프론트엔드 형식의 데이터
  *
- * 백엔드 abuseScenarios 데이터 구조:
- * backendData.abuseScenarios = [
- *   {
- *     title: string,              // 시나리오 제목
- *     severity: "높음"|"중간"|"낮음",  // 심각도
- *     scenario: string,            // 악용 시나리오 설명
- *     relatedClauses: string[],    // 관련 약관 조항들 (optional)
- *     potentialDamage: string,     // 예상 피해
- *     preventionMeasures: string,  // 예방 조치 (optional)
- *     realCases: [                 // 실제 사례 (optional)
- *       {
- *         title: string,           // 사례 제목
- *         url: string,             // 참고 링크 URL
- *         description: string      // 사례 설명 (optional)
- *       }
- *     ]
- *   }
- * ]
+ * 백엔드 응답 구조:
+ * {
+ *   summary: {
+ *     title: string,
+ *     overview: string,
+ *     totalClauses: number,
+ *     vulnerabilityCount: number,
+ *     riskLevel: string
+ *   },
+ *   termsSummary: {
+ *     mainPoints: string[],
+ *     legalGuards: string[],
+ *     requirments: string[]
+ *   },
+ *   vulnerabilities: VulnerableClause[],
+ *   recommendations: string[],
+ *   worstScenario: string,
+ *   session_id: string
+ * }
  */
 function transformCompanyAnalysisResponse(backendData) {
   return {
@@ -42,8 +43,8 @@ function transformCompanyAnalysisResponse(backendData) {
     },
     termsSummary: {
       mainPoints: backendData.termsSummary?.mainPoints || [],
-      keyRights: backendData.termsSummary?.keyRights || [],
-      keyObligations: backendData.termsSummary?.keyObligations || []
+      keyRights: backendData.termsSummary?.legalGuards || [],
+      keyObligations: backendData.termsSummary?.requirments || []
     },
     unfairClauses: backendData.vulnerabilities || [],
     recommendations: backendData.recommendations || [],
