@@ -4,12 +4,12 @@ import UnfairClauses from './UnfairClauses';
 
 /**
  * AnalysisResult Component
- * Main container for displaying analysis results with loading and error states
  *
- * Props:
- * - result: object - Analysis result data (summary, unfairClauses, recommendations)
- * - isLoading: boolean - Shows loading spinner
- * - error: string - Error message to display
+ * 분석 결과를 표시하는 메인 컨테이너 (로딩 및 에러 상태 처리 포함)
+ *
+ * @param {Object} result - 분석 결과 데이터 (summary, unfairClauses, recommendations)
+ * @param {boolean} isLoading - 로딩 스피너 표시 여부
+ * @param {string} error - 에러 메시지
  */
 function AnalysisResult({ result, isLoading, error }) {
   if (isLoading) {

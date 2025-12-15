@@ -1,6 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/common/header.css';
 
+/**
+ * Header Component
+ *
+ * 소비자용/기업용 페이지 네비게이션을 제공하는 헤더
+ */
 function Header() {
   const location = useLocation();
   const isConsumerPage = location.pathname === '/';

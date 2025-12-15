@@ -4,26 +4,26 @@ import { fetchSimilarCases } from '../../api/similarCases';
 
 /**
  * AbuseScenarios Component
- * Displays worst scenario and fetches similar real cases from API
- * Now with caching - prevents duplicate API calls
  *
- * Props:
- * - worstScenario: string - Worst scenario text from analysis result
- * - similarCases: array - Cached similar cases from parent
- * - setSimilarCases: function - Setter for similar cases in parent
+ * 최악의 시나리오 표시 및 유사 실제 사례 조회 (캐싱 지원)
+ *
+ * @param {string} worstScenario - 분석 결과의 최악 시나리오 텍스트
+ * @param {Array} similarCases - 부모로부터 캐시된 유사 사례
+ * @param {Function} setSimilarCases - 유사 사례 setter
  */
 function AbuseScenarios({ worstScenario, similarCases, setSimilarCases }) {
   const [realCases, setRealCases] = useState([]);
   const [isLoadingCases, setIsLoadingCases] = useState(false);
 
-  // Fetch similar real cases when worst scenario is provided (with caching)
+  /**
+   * 최악 시나리오 기반 유사 실제 사례 가져오기 (캐싱 지원)
+   */
   useEffect(() => {
     const loadSimilarCases = async () => {
       if (!worstScenario) {
         return;
       }
 
-      // Skip if already loaded (check cached similarCases from parent)
       if (similarCases) {
         setRealCases(similarCases);
         return;
@@ -31,10 +31,8 @@ function AbuseScenarios({ worstScenario, similarCases, setSimilarCases }) {
 
       setIsLoadingCases(true);
       try {
-        // Pass worst scenario text to API
         const cases = await fetchSimilarCases(worstScenario);
         setRealCases(cases);
-        // Cache the result in parent
         if (setSimilarCases) {
           setSimilarCases(cases);
         }
@@ -61,13 +59,11 @@ function AbuseScenarios({ worstScenario, similarCases, setSimilarCases }) {
       </p>
 
       <div className="abuse-scenario-single">
-        {/* Scenario Section */}
         <div className="abuse-scenario-content-section">
           <h3 className="abuse-scenario-content-title">시나리오</h3>
           <p className="abuse-scenario-text">{worstScenario}</p>
         </div>
 
-        {/* Similar Real Cases Section */}
         <div className="abuse-scenario-cases-section">
           <h3 className="abuse-scenario-content-title">유사한 실제 사례</h3>
 

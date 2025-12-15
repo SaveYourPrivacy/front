@@ -4,23 +4,23 @@ import '../../styles/home/complaintEmailTemplate.css';
 
 /**
  * ComplaintEmailTemplate Component
- * Generates and displays a complaint email template based on analysis results
- * Now with caching - prevents duplicate API calls
  *
- * Props:
- * - analysisResult: object - Contains summary, unfairClauses, and recommendations from terms analysis
- * - emailContent: object - Cached email content from parent
- * - setEmailContent: function - Setter for email content in parent
+ * 분석 결과 기반 컴플레인 메일 템플릿 생성 및 표시 (캐싱 지원)
+ *
+ * @param {Object} analysisResult - 약관 분석 결과 (summary, unfairClauses, recommendations)
+ * @param {Object} emailContent - 부모로부터 캐시된 이메일 컨텐츠
+ * @param {Function} setEmailContent - 이메일 컨텐츠 setter
  */
 function ComplaintEmailTemplate({ analysisResult, emailContent, setEmailContent }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  // Fetch email content from API only once when component mounts (with caching)
+  /**
+   * 이메일 컨텐츠를 API에서 가져오기 (캐싱 지원)
+   */
   useEffect(() => {
     const fetchEmailContent = async () => {
-      // Skip if already loaded (check cached emailContent from parent)
       if (emailContent || !analysisResult) {
         return;
       }
@@ -42,7 +42,9 @@ function ComplaintEmailTemplate({ analysisResult, emailContent, setEmailContent 
     fetchEmailContent();
   }, [analysisResult, emailContent, setEmailContent]);
 
-  // Copy email to clipboard
+  /**
+   * 이메일을 클립보드에 복사
+   */
   const handleCopyEmail = async () => {
     if (!emailContent) return;
 

@@ -4,31 +4,36 @@ import TermsCategorySelect from './TermsCategorySelect';
 
 /**
  * TermsInput Component
- * Allows users to input terms text manually or upload a file
  *
- * Props:
- * - onAnalyze: function(termsText) - Called when analyze button is clicked
- * - isLoading: boolean - Shows loading state on button
+ * 약관 입력 컴포넌트 - 텍스트 직접 입력 또는 파일 업로드 지원
+ *
+ * @param {Function} onAnalyze - 분석 버튼 클릭 시 호출되는 콜백 (termsText, type, category)
+ * @param {boolean} isLoading - 로딩 상태 (버튼 비활성화 및 텍스트 변경)
  */
 function TermsInput({ onAnalyze, isLoading }) {
-  const [activeTab, setActiveTab] = useState('text'); // 'text' or 'file'
+  const [activeTab, setActiveTab] = useState('text');
   const [termsText, setTermsText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  /**
+   * 파일 선택 핸들러 - PDF 파일만 허용
+   */
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // PDF 파일만 허용
       if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
         setSelectedFile(file);
       } else {
         alert('PDF 파일만 업로드할 수 있습니다.');
-        e.target.value = ''; // 파일 입력 초기화
+        e.target.value = '';
       }
     }
   };
 
+  /**
+   * 분석 버튼 클릭 핸들러
+   */
   const handleAnalyze = () => {
     if (activeTab === 'text') {
       if (termsText.trim()) {
@@ -41,6 +46,9 @@ function TermsInput({ onAnalyze, isLoading }) {
     }
   };
 
+  /**
+   * 분석 버튼 비활성화 여부 확인
+   */
   const isButtonDisabled = () => {
     if (isLoading) return true;
     if (activeTab === 'text') return !termsText.trim();
@@ -49,8 +57,6 @@ function TermsInput({ onAnalyze, isLoading }) {
 
   return (
     <div className="terms-input-container">
-
-      {/*약관 종류 선택 추가 */}
       <TermsCategorySelect onSelect={setSelectedCategory} />
       <h2 className="terms-input-title">약관 입력</h2>
 

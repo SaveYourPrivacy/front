@@ -1,17 +1,18 @@
 /**
  * Business Terms Analysis API
- * Analyzes terms for vulnerabilities and exploitation risks from a business perspective
+ *
+ * 기업용 약관 분석 API - 취약점 및 악용 위험 분석
  */
 
-// 백엔드 API URL 설정
 const API_BASE_URL = 'http://localhost:8000';
 
 /**
- * 백엔드 응답 형식을 프론트엔드 형식으로 변환
- * @param {Object} backendData - 백엔드에서 받은 데이터
+ * 백엔드 응답을 프론트엔드 형식으로 변환
+ *
+ * @param {Object} backendData - 백엔드 응답 데이터
  * @returns {Object} 프론트엔드 형식의 데이터
  *
- * Expected backend data structure for abuseScenarios:
+ * 백엔드 abuseScenarios 데이터 구조:
  * backendData.abuseScenarios = [
  *   {
  *     title: string,              // 시나리오 제목
@@ -51,10 +52,11 @@ function transformCompanyAnalysisResponse(backendData) {
 }
 
 /**
- * Analyzes terms text for business vulnerabilities
- * @param {string} termsText - The terms text to analyze
- * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
- * @returns {Promise<Object>} Analysis result with vulnerabilities
+ * 약관 텍스트 분석 (기업용)
+ *
+ * @param {string} termsText - 분석할 약관 텍스트
+ * @param {string} category - 약관 카테고리 ('광고', '환불', '개인정보', '책임제한', '자동결제')
+ * @returns {Promise<Object>} 분석 결과 (취약점 포함)
  */
 export async function analyzeBusinessTerms(termsText, category) {
   try {
@@ -74,8 +76,6 @@ export async function analyzeBusinessTerms(termsText, category) {
     }
 
     const data = await response.json();
-
-    // 백엔드 응답 형식을 프론트엔드 형식으로 변환
     return transformCompanyAnalysisResponse(data);
   } catch (error) {
     console.error('기업 약관 분석 중 오류 발생:', error);
@@ -84,14 +84,14 @@ export async function analyzeBusinessTerms(termsText, category) {
 }
 
 /**
- * Analyzes terms from uploaded PDF file for business vulnerabilities
- * @param {File} file - The PDF file to analyze
- * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
- * @returns {Promise<Object>} Analysis result with vulnerabilities
+ * PDF 파일로부터 약관 분석 (기업용)
+ *
+ * @param {File} file - 분석할 PDF 파일
+ * @param {string} category - 약관 카테고리 ('광고', '환불', '개인정보', '책임제한', '자동결제')
+ * @returns {Promise<Object>} 분석 결과 (취약점 포함)
  */
 export async function analyzeBusinessTermsFromFile(file, category) {
   try {
-    // PDF 파일 검증
     if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
       throw new Error('PDF 파일만 업로드할 수 있습니다.');
     }

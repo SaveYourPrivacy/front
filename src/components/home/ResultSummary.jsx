@@ -2,13 +2,16 @@ import '../../styles/home/resultSummary.css';
 
 /**
  * ResultSummary Component
- * Displays the analysis summary with key statistics and terms summary
  *
- * Props:
- * - summary: object - Contains title, overview, totalClauses, unfairCount, riskLevel
- * - termsSummary: object - Contains mainPoints, keyRights, keyObligations
+ * 분석 요약 정보 및 주요 통계를 표시하는 컴포넌트
+ *
+ * @param {Object} summary - 요약 정보 (title, overview, totalClauses, unfairCount, riskLevel)
+ * @param {Object} termsSummary - 약관 요약 (mainPoints, keyRights, keyObligations)
  */
 function ResultSummary({ summary, termsSummary }) {
+  /**
+   * 위험도에 따른 CSS 클래스 반환
+   */
   const getRiskClass = (riskLevel) => {
     if (riskLevel === '높음') return 'high-risk';
     if (riskLevel === '중간') return 'medium-risk';

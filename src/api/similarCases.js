@@ -1,17 +1,18 @@
 /**
  * Similar Cases API
- * Fetches similar real cases for abuse scenarios
+ *
+ * 악용 시나리오에 대한 유사 실제 사례 조회 API
  */
 
-// 백엔드 API URL 설정
 const API_BASE_URL = 'http://localhost:8000';
 
 /**
- * Fetches similar real cases for worst scenario text
- * @param {string} worstScenario - Worst scenario text from analysis result
- * @returns {Promise<Array>} Array of real cases
+ * 최악 시나리오에 대한 유사 실제 사례 조회
  *
- * Backend response structure:
+ * @param {string} worstScenario - 분석 결과의 최악 시나리오 텍스트
+ * @returns {Promise<Array>} 유사 사례 배열
+ *
+ * 백엔드 응답 구조:
  * {
  *   "cases": [
  *     {
@@ -40,9 +41,6 @@ export async function fetchSimilarCases(worstScenario) {
 
     const data = await response.json();
 
-    // 백엔드 응답 형식을 프론트엔드 형식으로 변환
-    // summary -> description으로 매핑
-    // summary 필드가 누락된 경우 기본값 제공
     const cases = (data.cases || []).map(caseItem => ({
       title: caseItem.title || '관련 사례',
       url: caseItem.url || '#',
@@ -52,7 +50,6 @@ export async function fetchSimilarCases(worstScenario) {
     return cases;
   } catch (error) {
     console.error('유사 사례 조회 중 오류 발생:', error);
-    // Return empty array on error to allow graceful degradation
     return [];
   }
 }

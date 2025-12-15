@@ -1,16 +1,19 @@
-// 백엔드 API URL 설정
+/**
+ * Complaint Email API
+ *
+ * 분석 결과 기반 컴플레인 메일 템플릿 생성 API
+ */
+
 const API_BASE_URL = 'http://localhost:8000';
 
 /**
- * Generates a complaint email template based on analysis results
- * @param {object} analysisResult - The analysis result containing session_id
- * @returns {Promise} Email template containing:
- *   - subject: string - Email subject (mapped from title)
- *   - body: string - Email body content (mapped from content)
+ * 분석 결과를 기반으로 컴플레인 메일 템플릿 생성
+ *
+ * @param {Object} analysisResult - 분석 결과 (session_id 포함)
+ * @returns {Promise<Object>} 메일 템플릿 (subject, body)
  */
 export const generateComplaintEmail = async (analysisResult) => {
   try {
-    // analysisResult에서 session_id 추출
     const sessionId = analysisResult.session_id;
 
     if (!sessionId) {
@@ -32,8 +35,6 @@ export const generateComplaintEmail = async (analysisResult) => {
     }
 
     const data = await response.json();
-
-    // 백엔드 응답을 프론트엔드 형식으로 변환
     return {
       subject: data.title,
       body: data.content

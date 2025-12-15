@@ -1,15 +1,17 @@
-// 백엔드 API URL 설정
+/**
+ * Terms Analysis API
+ *
+ * 소비자용 약관 분석 API
+ */
+
 const API_BASE_URL = 'http://localhost:8000';
 
 /**
- * Analyzes terms text for unfair clauses
- * @param {string} termsText - The terms text to analyze
- * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
- * @returns {Promise} Analysis result containing:
- *   - summary: {title, overview, totalClauses, unfairCount, riskLevel}
- *   - termsSummary: {mainPoints, keyRights, keyObligations}
- *   - unfairClauses: array of unfair clause objects
- *   - recommendations: array of recommendation strings
+ * 약관 텍스트 분석 (소비자용)
+ *
+ * @param {string} termsText - 분석할 약관 텍스트
+ * @param {string} category - 약관 카테고리 ('광고', '환불', '개인정보', '책임제한', '자동결제')
+ * @returns {Promise<Object>} 분석 결과 (summary, termsSummary, unfairClauses, recommendations)
  */
 export const analyzeTerms = async (termsText, category) => {
   try {
@@ -37,14 +39,14 @@ export const analyzeTerms = async (termsText, category) => {
 };
 
 /**
- * Uploads and analyzes terms from a file
- * @param {File} file - The file containing terms text
- * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
- * @returns {Promise} Analysis result
+ * 파일로부터 약관 분석 (소비자용)
+ *
+ * @param {File} file - 약관 텍스트가 포함된 파일
+ * @param {string} category - 약관 카테고리 ('광고', '환불', '개인정보', '책임제한', '자동결제')
+ * @returns {Promise<Object>} 분석 결과
  */
 export const analyzeTermsFromFile = async (file, category) => {
   try {
-    // PDF 파일인 경우 백엔드 PDF 엔드포인트 사용
     if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
       const formData = new FormData();
       formData.append('file', file);
@@ -63,7 +65,6 @@ export const analyzeTermsFromFile = async (file, category) => {
       return data;
     }
 
-    // 텍스트 파일인 경우 파일 내용을 읽어서 텍스트 분석 API 호출
     const text = await readFileAsText(file);
     return analyzeTerms(text, category);
   } catch (error) {
@@ -73,9 +74,10 @@ export const analyzeTermsFromFile = async (file, category) => {
 };
 
 /**
- * Helper function to read file as text
- * @param {File} file - The file to read
- * @returns {Promise<string>} File content as text
+ * 파일을 텍스트로 읽기
+ *
+ * @param {File} file - 읽을 파일
+ * @returns {Promise<string>} 파일 내용 (텍스트)
  */
 const readFileAsText = (file) => {
   return new Promise((resolve, reject) => {

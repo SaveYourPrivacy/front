@@ -1,9 +1,19 @@
 import { useState } from 'react';
 import '../../styles/home/termsCategorySelect.css';
 
+/**
+ * TermsCategorySelect Component
+ *
+ * 약관 종류를 선택하는 라디오 버튼 그룹
+ *
+ * @param {Function} onSelect - 카테고리 선택 시 호출되는 콜백
+ */
 function TermsCategorySelect({ onSelect }) {
     const [category, setCategory] = useState('');
 
+    /**
+     * 카테고리 선택 핸들러
+     */
     const handleSelect = (e) => {
         const value = e.target.value;
         setCategory(value);

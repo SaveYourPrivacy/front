@@ -4,20 +4,29 @@ import ResultTabs from '../components/home/ResultTabs';
 import { analyzeBusinessTerms, analyzeBusinessTermsFromFile } from '../api/businessAnalysis';
 import { askQuestion } from '../api/questionAnswer';
 
+/**
+ * BusinessAnalysis Page Component (기업용)
+ *
+ * 기업을 위한 약관 분석 페이지
+ * 약관 입력, 분석 결과 표시, 악용 시나리오, 유사 사례, 질의응답 기능 제공
+ */
 function BusinessAnalysis() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
-  const [similarCases, setSimilarCases] = useState(null); // 유사 사례 캐싱
+  const [similarCases, setSimilarCases] = useState(null);
 
+  /**
+   * 약관 분석 핸들러
+   */
   const handleAnalyze = async (input, type) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
-    setQuestions([]); // Reset questions when analyzing new terms
-    setSimilarCases(null); // Reset similar cases when analyzing new terms
+    setQuestions([]);
+    setSimilarCases(null);
 
     try {
       let result;
@@ -34,6 +43,9 @@ function BusinessAnalysis() {
     }
   };
 
+  /**
+   * 질문 처리 핸들러
+   */
   const handleAskQuestion = async (questionText) => {
     const newQuestion = {
       id: Date.now().toString(),

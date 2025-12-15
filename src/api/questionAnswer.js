@@ -1,15 +1,20 @@
-// 백엔드 API URL 설정
+/**
+ * Question Answer API
+ *
+ * 약관 분석 결과에 대한 추가 질문 처리 API
+ */
+
 const API_BASE_URL = 'http://localhost:8000';
 
 /**
- * Sends a question about the analyzed terms and receives an answer
- * @param {string} questionText - The question to ask
- * @param {object} analysisContext - The analysis result context containing session_id
- * @returns {Promise<string>} The answer to the question
+ * 분석된 약관에 대한 질문을 전송하고 답변 받기
+ *
+ * @param {string} questionText - 질문 내용
+ * @param {Object} analysisContext - 분석 결과 컨텍스트 (session_id 포함)
+ * @returns {Promise<string>} 질문에 대한 답변
  */
 export const askQuestion = async (questionText, analysisContext = null) => {
   try {
-    // analysisContext에서 session_id 추출
     const sessionId = analysisContext?.session_id;
 
     if (!sessionId) {
@@ -32,8 +37,6 @@ export const askQuestion = async (questionText, analysisContext = null) => {
     }
 
     const data = await response.json();
-
-    // 백엔드 응답에서 summary 반환
     return data.summary;
   } catch (error) {
     console.error('질문 처리 중 오류 발생:', error);

@@ -15,6 +15,9 @@ import '../../styles/home/questionBoard.css';
 function QuestionBoard({ onAskQuestion, questions = [], isLoading = false }) {
   const [questionText, setQuestionText] = useState('');
 
+  /**
+   * 질문 제출 핸들러
+   */
   const handleSubmit = () => {
     if (!questionText.trim() || isLoading) return;
 
@@ -22,13 +25,18 @@ function QuestionBoard({ onAskQuestion, questions = [], isLoading = false }) {
     setQuestionText('');
   };
 
+  /**
+   * 키보드 단축키 핸들러 (Ctrl/Cmd + Enter)
+   */
   const handleKeyDown = (e) => {
-    // Submit on Ctrl/Cmd + Enter
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
       handleSubmit();
     }
   };
 
+  /**
+   * 타임스탬프를 상대 시간으로 포맷
+   */
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return '';
 

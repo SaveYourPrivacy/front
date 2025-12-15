@@ -7,21 +7,21 @@ import AbuseScenarios from './AbuseScenarios';
 
 /**
  * ResultTabs Component
- * Displays analysis results in tabs to reduce API calls and improve performance
  *
- * Props:
- * - analysisResult: object - Analysis result data
- * - isLoading: boolean - Shows loading spinner
- * - error: string - Error message to display
- * - questions: array - List of questions and answers
- * - onAskQuestion: function - Handler for asking questions
- * - isLoadingQuestion: boolean - Loading state for questions
- * - emailContent: object - Cached email content (optional, for consumer only)
- * - setEmailContent: function - Setter for email content (optional, for consumer only)
- * - showEmailTab: boolean - Whether to show email template tab (default: true)
- * - showScenariosTab: boolean - Whether to show abuse scenarios tab (default: false)
- * - similarCases: array - Cached similar cases (optional, for business only)
- * - setSimilarCases: function - Setter for similar cases (optional, for business only)
+ * 분석 결과를 탭으로 표시 (API 호출 최소화 및 성능 개선)
+ *
+ * @param {Object} analysisResult - 분석 결과 데이터
+ * @param {boolean} isLoading - 로딩 스피너 표시 여부
+ * @param {string} error - 에러 메시지
+ * @param {Array} questions - 질문 및 답변 목록
+ * @param {Function} onAskQuestion - 질문 처리 핸들러
+ * @param {boolean} isLoadingQuestion - 질문 로딩 상태
+ * @param {Object} emailContent - 캐시된 이메일 컨텐츠 (소비자용)
+ * @param {Function} setEmailContent - 이메일 컨텐츠 setter (소비자용)
+ * @param {boolean} showEmailTab - 이메일 템플릿 탭 표시 여부 (기본값: true)
+ * @param {boolean} showScenariosTab - 악용 시나리오 탭 표시 여부 (기본값: false)
+ * @param {Array} similarCases - 캐시된 유사 사례 (기업용)
+ * @param {Function} setSimilarCases - 유사 사례 setter (기업용)
  */
 function ResultTabs({
   analysisResult,

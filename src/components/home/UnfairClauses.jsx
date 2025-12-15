@@ -2,19 +2,25 @@ import '../../styles/home/unfairClauses.css';
 
 /**
  * UnfairClauses Component
- * Displays detailed information about unfair clauses found in the terms
  *
- * Props:
- * - unfairClauses: array - List of unfair clause objects
- * - recommendations: array - List of recommendation strings
+ * 불공정 약관 상세 정보를 표시하는 컴포넌트
+ *
+ * @param {Array} unfairClauses - 불공정 조항 객체 배열
+ * @param {Array} recommendations - 개선 권고사항 배열
  */
 function UnfairClauses({ unfairClauses, recommendations }) {
+  /**
+   * 심각도에 따른 CSS 클래스 반환
+   */
   const getSeverityClass = (severity) => {
     if (severity === '높음') return 'high';
     if (severity === '중간') return 'medium';
     return 'low';
   };
 
+  /**
+   * 여러 이슈 중 가장 높은 심각도 반환
+   */
   const getHighestSeverity = (issues) => {
     const severityOrder = { '높음': 3, '중간': 2, '낮음': 1 };
     let highest = '낮음';

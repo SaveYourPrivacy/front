@@ -4,20 +4,29 @@ import ResultTabs from '../components/home/ResultTabs';
 import { analyzeTerms, analyzeTermsFromFile } from '../api/termsAnalysis';
 import { askQuestion } from '../api/questionAnswer';
 
+/**
+ * Home Page Component (소비자용)
+ *
+ * 소비자를 위한 약관 분석 페이지
+ * 약관 입력, 분석 결과 표시, 질의응답, 컴플레인 메일 템플릿 생성 기능 제공
+ */
 function Home() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
-  const [emailContent, setEmailContent] = useState(null); // 이메일 컨텐츠 캐싱
+  const [emailContent, setEmailContent] = useState(null);
 
+  /**
+   * 약관 분석 핸들러
+   */
   const handleAnalyze = async (input, type, category) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
-    setQuestions([]); // Reset questions when analyzing new terms
-    setEmailContent(null); // Reset email content when analyzing new terms
+    setQuestions([]);
+    setEmailContent(null);
 
     try {
       let result;
@@ -34,6 +43,9 @@ function Home() {
     }
   };
 
+  /**
+   * 질문 처리 핸들러
+   */
   const handleAskQuestion = async (questionText) => {
     const newQuestion = {
       id: Date.now().toString(),
