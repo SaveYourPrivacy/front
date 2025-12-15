@@ -48,6 +48,7 @@ function transformCompanyAnalysisResponse(backendData) {
     unfairClauses: backendData.vulnerabilities || [],
     recommendations: backendData.recommendations || [],
     worstScenario: backendData.worstScenario || "",
+    session_id: backendData.session_id || null,
   };
 }
 
