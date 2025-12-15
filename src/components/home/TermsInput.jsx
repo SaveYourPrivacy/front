@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import '../../styles/home/termsInput.css';
-import { sampleTermsText } from '../../mock/dummyData';
 import TermsCategorySelect from './TermsCategorySelect'; 
 
 /**
@@ -42,11 +41,6 @@ function TermsInput({ onAnalyze, isLoading }) {
     }
   };
 
-  const handleLoadSample = () => {
-    setTermsText(sampleTermsText);
-    setActiveTab('text');
-  };
-
   const isButtonDisabled = () => {
     if (isLoading) return true;
     if (activeTab === 'text') return !termsText.trim();
@@ -76,27 +70,12 @@ function TermsInput({ onAnalyze, isLoading }) {
       </div>
 
       {activeTab === 'text' ? (
-        <div>
-          <textarea
-            className="terms-input-textarea"
-            placeholder="약관 내용을 입력하세요..."
-            value={termsText}
-            onChange={(e) => setTermsText(e.target.value)}
-          />
-          <button
-            type="button"
-            className="terms-input-button"
-            onClick={handleLoadSample}
-            style={{
-              backgroundColor: '#ffffff',
-              color: '#1f2937',
-              border: '1px solid #d1d5db',
-              marginTop: '0.5rem'
-            }}
-          >
-            샘플 약관 불러오기
-          </button>
-        </div>
+        <textarea
+          className="terms-input-textarea"
+          placeholder="약관 내용을 입력하세요..."
+          value={termsText}
+          onChange={(e) => setTermsText(e.target.value)}
+        />
       ) : (
         <div className="terms-input-file-area">
           {!selectedFile ? (
