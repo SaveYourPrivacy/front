@@ -53,10 +53,10 @@ function transformCompanyAnalysisResponse(backendData) {
 /**
  * Analyzes terms text for business vulnerabilities
  * @param {string} termsText - The terms text to analyze
- * @param {string} category - The category of terms (optional)
+ * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
  * @returns {Promise<Object>} Analysis result with vulnerabilities
  */
-export async function analyzeBusinessTerms(termsText, category = '일반 약관') {
+export async function analyzeBusinessTerms(termsText, category) {
   try {
     const response = await fetch(`${API_BASE_URL}/company_terms_analyze`, {
       method: 'POST',
@@ -86,10 +86,10 @@ export async function analyzeBusinessTerms(termsText, category = '일반 약관'
 /**
  * Analyzes terms from uploaded PDF file for business vulnerabilities
  * @param {File} file - The PDF file to analyze
- * @param {string} category - The category of terms (optional)
+ * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
  * @returns {Promise<Object>} Analysis result with vulnerabilities
  */
-export async function analyzeBusinessTermsFromFile(file, category = '일반 약관') {
+export async function analyzeBusinessTermsFromFile(file, category) {
   try {
     // PDF 파일 검증
     if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {

@@ -4,14 +4,14 @@ const API_BASE_URL = 'http://localhost:8000';
 /**
  * Analyzes terms text for unfair clauses
  * @param {string} termsText - The terms text to analyze
- * @param {string} category - The category of terms (optional)
+ * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
  * @returns {Promise} Analysis result containing:
  *   - summary: {title, overview, totalClauses, unfairCount, riskLevel}
  *   - termsSummary: {mainPoints, keyRights, keyObligations}
  *   - unfairClauses: array of unfair clause objects
  *   - recommendations: array of recommendation strings
  */
-export const analyzeTerms = async (termsText, category = '일반 약관') => {
+export const analyzeTerms = async (termsText, category) => {
   try {
     const response = await fetch(`${API_BASE_URL}/terms_analyze`, {
       method: 'POST',
@@ -39,10 +39,10 @@ export const analyzeTerms = async (termsText, category = '일반 약관') => {
 /**
  * Uploads and analyzes terms from a file
  * @param {File} file - The file containing terms text
- * @param {string} category - The category of terms (optional)
+ * @param {string} category - The category of terms (valid values: '광고', '환불', '개인정보', '책임제한', '자동결제')
  * @returns {Promise} Analysis result
  */
-export const analyzeTermsFromFile = async (file, category = '일반 약관') => {
+export const analyzeTermsFromFile = async (file, category) => {
   try {
     // PDF 파일인 경우 백엔드 PDF 엔드포인트 사용
     if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
