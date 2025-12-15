@@ -42,7 +42,7 @@ function ResultSummary({ summary, termsSummary }) {
 
       {termsSummary && (
         <div className="terms-summary-section">
-          <h3 className="terms-summary-subtitle">약관 주요 내용</h3>
+          <h3 className="terms-summary-subtitle">약관 분석 내용</h3>
           <div className="terms-summary-content">
             <div className="terms-summary-block">
               <h4 className="terms-summary-block-title">핵심 내용</h4>

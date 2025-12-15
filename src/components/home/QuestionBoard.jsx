@@ -69,7 +69,7 @@ function QuestionBoard({ onAskQuestion, questions = [], isLoading = false }) {
       <div className="question-input-container">
         <textarea
           className="question-input-textarea"
-          placeholder="예: 이 약관에서 가장 주의해야 할 조항은 무엇인가요?"
+          placeholder="여기에 질문을 입력하세요..."
           value={questionText}
           onChange={(e) => setQuestionText(e.target.value)}
           onKeyDown={handleKeyDown}
