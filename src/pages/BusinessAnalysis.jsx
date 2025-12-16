@@ -21,7 +21,7 @@ function BusinessAnalysis() {
   /**
    * 약관 분석 핸들러
    */
-  const handleAnalyze = async (input, type) => {
+  const handleAnalyze = async (input, type, category) => {
     setIsLoading(true);
     setError(null);
     setAnalysisResult(null);
@@ -31,9 +31,9 @@ function BusinessAnalysis() {
     try {
       let result;
       if (type === 'text') {
-        result = await analyzeBusinessTerms(input);
+        result = await analyzeBusinessTerms(input, category);
       } else {
-        result = await analyzeBusinessTermsFromFile(input);
+        result = await analyzeBusinessTermsFromFile(input, category);
       }
       setAnalysisResult(result);
     } catch (err) {

@@ -23,7 +23,7 @@ export const askQuestion = async (questionText, sessionId) => {
       throw new Error('질문 내용을 입력해주세요.');
     }
 
-    const response = await fetch(`${API_BASE_URL}/AdditionalNotes_Legacy`, {
+    const response = await fetch(`${API_BASE_URL}/AdditionalNotes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
