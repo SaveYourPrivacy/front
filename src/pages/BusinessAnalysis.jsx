@@ -59,7 +59,7 @@ function BusinessAnalysis() {
     setIsLoadingQuestion(true);
 
     try {
-      const answer = await askQuestion(questionText, analysisResult);
+      const answer = await askQuestion(questionText, analysisResult?.session_id);
 
       setQuestions(prev => prev.map(q =>
         q.id === newQuestion.id
